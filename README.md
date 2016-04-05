@@ -682,11 +682,12 @@ A standardised approach for developing Angular applications in teams. This style
 
 ## Minification and annotation
 
-  - **ng-annotate**: Use [ng-annotate](//github.com/olov/ng-annotate) for Gulp as `ng-min` is deprecated, and comment functions that need automated dependency injection using `/** @ngInject */`
+  - **ng-annotate**: Use [ng-annotate](//github.com/olov/ng-annotate) for Gulp as `ng-min` is deprecated, and comment functions that need automated dependency injection using the literal string expression `'ngInject';`
 
     ```javascript
     function MainCtrl (SomeService) {
       'ngInject';
+
       this.doSomething = SomeService.doSomething;
     }
     angular
@@ -699,6 +700,7 @@ A standardised approach for developing Angular applications in teams. This style
     ```javascript
     function MainCtrl (SomeService) {
       'ngInject';
+
       this.doSomething = SomeService.doSomething;
     }
     MainCtrl.$inject = ['SomeService'];

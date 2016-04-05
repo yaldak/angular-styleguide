@@ -4,8 +4,6 @@
 
 A standardised approach for developing Angular applications in teams. This styleguide touches on concepts, syntax, conventions and is based on my experience [writing](http:////toddmotto.com) about, [talking](https://speakerdeck.com/toddmotto) about, and building Angular applications.
 
-<a href="http://voux.io" target="_blank"><img src="http://www.digital-results.com/hubfs/Images/voux-logo__colour.svg"></a>
-
 #### Community
 [John Papa](//twitter.com/John_Papa) and I have discussed in-depth styling patterns for Angular and as such have both released separate styleguides. Thanks to those discussions, I've learned some great tips from John that have helped shape this guide. We've both created our own take on a styleguide. I urge you to [check his out](//github.com/johnpapa/angularjs-styleguide) to compare thoughts.
 
@@ -194,35 +192,6 @@ A standardised approach for developing Angular applications in teams. This style
     ```
 
     *Why?* : Function context changes the `this` value, use it to avoid `.bind()` calls and scoping issues
-    
-  - **ES6**: Avoid `var vm = this;` when using ES6
-
-    ```javascript
-    // avoid
-    function MainCtrl () {
-      let vm = this;
-      let doSomething = arg => {
-        console.log(vm);
-      };
-      
-      // exports
-      vm.doSomething = doSomething;
-    }
-
-    // recommended
-    function MainCtrl () {
-      
-      let doSomething = arg => {
-        console.log(this);
-      };
-      
-      // exports
-      this.doSomething = doSomething;
-      
-    }
-    ```
-
-    *Why?* : Use ES6 arrow functions when necessary to access the `this` value lexically
 
   - **Presentational logic only (MVVM)**: Presentational logic only inside a controller, avoid Business logic (delegate to Services)
 
@@ -716,10 +685,8 @@ A standardised approach for developing Angular applications in teams. This style
   - **ng-annotate**: Use [ng-annotate](//github.com/olov/ng-annotate) for Gulp as `ng-min` is deprecated, and comment functions that need automated dependency injection using `/** @ngInject */`
 
     ```javascript
-    /**
-     * @ngInject
-     */
     function MainCtrl (SomeService) {
+      'ngInject';
       this.doSomething = SomeService.doSomething;
     }
     angular
@@ -730,10 +697,8 @@ A standardised approach for developing Angular applications in teams. This style
   - Which produces the following output with the `$inject` annotation
 
     ```javascript
-    /**
-     * @ngInject
-     */
     function MainCtrl (SomeService) {
+      'ngInject';
       this.doSomething = SomeService.doSomething;
     }
     MainCtrl.$inject = ['SomeService'];

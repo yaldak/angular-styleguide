@@ -38,20 +38,19 @@ Deemed fair because there is only one ngApp per document in our convention, and 
 
     ```javascript
     // avoid
-    var app = angular.module('app', []);
+    var app = angular.module('swf.ng.app', []);
     app.controller();
     app.factory();
 
     // avoid
     angular
-      .module('app', [])
+      .module('swf.ng.app', [])
       .controller()
       .factory();
 
     // recommended
-    ngApp
-      .controller()
-      .factory();
+    ngApp.controller();
+    ngApp.factory();
     ```
 
   - Use independent module definition when the scope of the module is far

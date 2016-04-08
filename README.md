@@ -711,6 +711,12 @@ A standardised approach for developing Angular applications in teams. This style
 
 **[Back to top](#table-of-contents)**
 
+## Modals
+  - **angular-ui-bootstrap**: Use Angular UI Bootstrap (baked into the kit) to instantiate and design modals.
+  - Reference documentation is here: http://URLHERE/
+  - Modal controllers shall be considered "partial" controller because they have no route, and are instead invoked by another controller. Therefore their file name suffix should be "Partl" instead of "Ctrl".
+  - As a rule of thumb, always use controllerAs: 'vm' to invoke the modal and persist with the prototype pattern
+
 ## Angular docs
 For anything else, including API reference, check the [Angular documentation](//docs.angularjs.org/api).
 

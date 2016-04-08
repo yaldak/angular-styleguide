@@ -1,13 +1,8 @@
 # Angular styleguide
 
-*Opinionated Angular styleguide for teams by [@toddmotto](//twitter.com/toddmotto)*
-
-A standardised approach for developing Angular applications in teams. This styleguide touches on concepts, syntax, conventions and is based on my experience [writing](http:////toddmotto.com) about, [talking](https://speakerdeck.com/toddmotto) about, and building Angular applications.
-
-#### Community
-[John Papa](//twitter.com/John_Papa) and I have discussed in-depth styling patterns for Angular and as such have both released separate styleguides. Thanks to those discussions, I've learned some great tips from John that have helped shape this guide. We've both created our own take on a styleguide. I urge you to [check his out](//github.com/johnpapa/angularjs-styleguide) to compare thoughts.
-
-> See the [original article](http://toddmotto.com/opinionated-angular-js-styleguide-for-teams) that sparked this off
+* Opinionated Angular styleguide for Pavlov Media teams by [@ykako]
+* Forked from style guide by [@toddmotto](//twitter.com/toddmotto)
+* See the [original project](https://github.com/toddmotto/angular-styleguide)
 
 ## Table of Contents
 
@@ -22,6 +17,7 @@ A standardised approach for developing Angular applications in teams. This style
   1. [Angular wrapper references](#angular-wrapper-references)
   1. [Comment standards](#comment-standards)
   1. [Minification and annotation](#minification-and-annotation)
+  1. [Modals](#modals)
 
 ## Modules
 
@@ -716,6 +712,8 @@ A standardised approach for developing Angular applications in teams. This style
   - Reference documentation is here: http://URLHERE/
   - Modal controllers shall be considered "partial" controller because they have no route, and are instead invoked by another controller. Therefore their file name suffix should be "Partl" instead of "Ctrl".
   - As a rule of thumb, always use controllerAs: 'vm' to invoke the modal and persist with the prototype pattern
+
+**[Back to top](#table-of-contents)**
 
 ## Angular docs
 For anything else, including API reference, check the [Angular documentation](//docs.angularjs.org/api).

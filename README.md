@@ -6,6 +6,7 @@
 
 ## Table of Contents
 
+  1. [Window Globals](#globals)
   1. [Modules](#modules)
   1. [Controllers](#controllers)
   1. [Services and Factory](#services-and-factory)
@@ -19,9 +20,21 @@
   1. [Minification and annotation](#minification-and-annotation)
   1. [Modals](#modals)
 
-## Modules
+## Window Globals
+There are four global variables defined on the ```window``` object.
+When used irresponsibly, globals are problematic for various reasons. Modern web
+applications tend to use them anyway for their convenience. We follow suit, under
+very controlled circumstances.
 
-  - **Definitions**: Declare modules without a variable using the setter and getter syntax
+The four globals are:
+* ``_``: singleton lodash instance with SWF-specific mixins applied
+* ``$``: singleton jQuery instance for dire situations, use it sparingly
+* ``angular``: singleton angular instance for convenience and backwards-capability of modules
+* ``ngApp``: a reference to angular.module('swf.ng.app') for convenience.
+Deemed fair because there is only one ngApp per document in our convention, and it is bound to <html> (root of DOM).
+
+## Modules
+  - **Local application factories**: Use ngApp to register them
 
     ```javascript
     // avoid
@@ -29,9 +42,32 @@
     app.controller();
     app.factory();
 
-    // recommended
+    // avoid
     angular
       .module('app', [])
+      .controller()
+      .factory();
+
+    // recommended
+    ngApp
+      .controller()
+      .factory();
+    ```
+
+  - Use independent module definition when the scope of the module is far
+  out of reach from presentational aspects of the
+
+  - **Independent Module Definitions**: Declare modules without a variable using the setter and getter syntax
+
+    ```javascript
+    // avoid
+    var app = angular.module('app.dao', []);
+    app.controller();
+    app.factory();
+
+    // recommended
+    angular
+      .module('app.dao', [])
       .controller()
       .factory();
     ```
@@ -42,8 +78,7 @@
 
     ```javascript
     // avoid
-    angular
-      .module('app', [])
+    ngApp
       .controller('MainCtrl', function MainCtrl () {
 
       })
@@ -58,8 +93,7 @@
     function SomeService () {
 
     }
-    angular
-      .module('app', [])
+    ngApp
       .controller('MainCtrl', MainCtrl)
       .service('SomeService', SomeService);
     ```
@@ -350,6 +384,9 @@
       .module('app')
       .directive('dragUpload', dragUpload);
     ```
+
+  - **id tags**: Do not use id="" tags inside of application templates unless absolutely necessary.
+  In such case, ensure they have a very precise label relative to the module name (i.e. ngApp-home-marketing-box)
 
   - **Naming conventions**: Never `ng-*` prefix custom directives, they might conflict future native directives
 

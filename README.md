@@ -477,84 +477,8 @@ Deemed fair because there is only one ngApp per document in our convention, and 
 **[Back to top](#table-of-contents)**
 
 ## Routing resolves
-
-  - **Promises**: Resolve Controller dependencies in the `$routeProvider` (or `$stateProvider` for `ui-router`), not the Controller itself
-
-    ```javascript
-    // avoid
-    function MainCtrl (SomeService) {
-      var _this = this;
-      // unresolved
-      _this.something;
-      // resolved asynchronously
-      SomeService.doSomething().then(function (response) {
-        _this.something = response;
-      });
-    }
-    angular
-      .module('app')
-      .controller('MainCtrl', MainCtrl);
-
-    // recommended
-    function config ($routeProvider) {
-      $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        resolve: {
-          // resolve here
-        }
-      });
-    }
-    angular
-      .module('app')
-      .config(config);
-    ```
-
-  - **Controller.resolve property**: Never bind logic to the router itself. Reference a `resolve` property for each Controller to couple the logic
-
-    ```javascript
-    // avoid
-    function MainCtrl (SomeService) {
-      this.something = SomeService.something;
-    }
-
-    function config ($routeProvider) {
-      $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controllerAs: 'vm',
-        controller: 'MainCtrl'
-        resolve: {
-          doSomething: function () {
-            return SomeService.doSomething();
-          }
-        }
-      });
-    }
-
-    // recommended
-    function MainCtrl (SomeService) {
-      this.something = SomeService.something;
-    }
-
-    MainCtrl.resolve = {
-      doSomething: function (SomeService) {
-        return SomeService.doSomething();
-      }
-    };
-
-    function config ($routeProvider) {
-      $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controllerAs: 'vm',
-        controller: 'MainCtrl'
-        resolve: MainCtrl.resolve
-      });
-    }
-    ```
-
-  - This keeps resolve dependencies inside the same file as the Controller and the router free from logic
+  - At this time, this section is not complete
+  - Refer to angular-ui-router documentation
 
 **[Back to top](#table-of-contents)**
 
@@ -744,8 +668,9 @@ Deemed fair because there is only one ngApp per document in our convention, and 
 **[Back to top](#table-of-contents)**
 
 ## Modals
+TODO: reference precise version number of uib documentation
   - **angular-ui-bootstrap**: Use Angular UI Bootstrap (baked into the kit) to instantiate and design modals.
-  - Reference documentation is here: http://URLHERE/
+  - Reference documentation is here: http://angular-ui.github.io/bootstrap/#/modal
   - Modal controllers shall be considered "partial" controller because they have no route, and are instead invoked by another controller. Therefore their file name suffix should be "Partl" instead of "Ctrl".
   - As a rule of thumb, always use controllerAs: 'vm' to invoke the modal and persist with the prototype pattern
 
